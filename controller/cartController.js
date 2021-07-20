@@ -34,7 +34,7 @@ module.exports = {
                         product_id: product._id,
                         user_id: user_id,
                         name: product.name,
-                        price: product.price,
+                        price: product.offerprice ? product.offerprice : product.price,
                         quantity_available: product.quantity_available,
                         quantity_selected: product.quantity_selected,
                         image: product.image,

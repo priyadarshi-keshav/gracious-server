@@ -107,10 +107,11 @@ module.exports = {
     // @POST ROUTE /admin/create_category
     createCategory: async (req, res, next) => {
         try {
-            const { category_name, category_image, created_by } = req.body
+            const { category_name, category_image, category_description, created_by } = req.body
             let data = {
                 category_name,
                 category_image,
+                category_description,
                 created_by
             }
             const newCategory = new dbcategory(data)
@@ -126,13 +127,14 @@ module.exports = {
     updateCategory: async (req, res, next) => {
         try {
             const categoryId = req.params.categoryId
-            const { category_name, category_image } = req.body
+            const { category_name, category_image, category_description } = req.body
 
             const category = await dbcategory.findById(categoryId)
             if (category) {
                 category.category_name = category_name || category.category_name,
-                    category.category_image = category_image || category.category_image,
-                    console.log(category)
+                category.category_description = category_description || category.category_description,
+                category.category_image = category_image || category.category_image,
+                
                 await category.save()
                 return res.send(`${category.category_name} is updated`)
             }
@@ -154,6 +156,7 @@ module.exports = {
                 brand,
                 description,
                 price,
+                offerprice: offerprice ? offerprice : null,
                 image: image[0],
                 image2: image.length === 2 && image[1] || '',
                 image3: image.length === 3 && image[2] || '',
@@ -167,10 +170,10 @@ module.exports = {
                 },
                 created_by,
                 category_id,
-                rating : 0,
+                rating: 0,
                 reviews: []
             }
-            
+
             const newProduct = new dbproduct(productData)
             await newProduct.save()
             return res.send("Product added successfully")
@@ -184,16 +187,18 @@ module.exports = {
     updateProduct: async (req, res, next) => {
         try {
             const productId = req.params.productId
-            const { name, brand, description, price, quantity_available, quantity_ordered, product_details, category_id } = req.body
+            const { name, brand, description, price, offerprice, quantity_available, quantity_ordered, product_details, category_id } = req.body
             const product = await dbproduct.findById(productId)
+            console.log(req.body)
             if (product) {
-                product.name = name || product.name,
-                product.brand = brand || product.brand,
-                product.description = description || product.description,
-                product.price = price || product.price,
+                product.name = name || product.name
+                product.brand = brand || product.brand
+                product.description = description || product.description
+                product.price = price || product.price
+                product.offerprice = offerprice || product.offerprice
                 product.quantity_available = quantity_available || product.quantity_available,
-                product.quantity_ordered = quantity_ordered || product.quantity_ordered,
-                product.product_details.material = product_details.material ||product.product_details.material
+                    product.quantity_ordered = quantity_ordered || product.quantity_ordered,
+                    product.product_details.material = product_details.material || product.product_details.material
                 product.product_details.color = product_details.color || product.product_details.color
                 product.product_details.items_in_pack = product_details.items_in_pack || product.product_details.items_in_pack
                 product.category_id = category_id || product.category_id

@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const orderSchema = mongoose.Schema(
     {
+        order_id:{type:Number},
         orderedBy: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -84,7 +85,10 @@ const orderSchema = mongoose.Schema(
     },
     {
         timestamps: true
-    }
+    },
+    // {
+    //     strict: false
+    // }
 )
 
 const Order = mongoose.model('orders', orderSchema)

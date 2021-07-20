@@ -4,9 +4,8 @@
   "description": "we will make backend of e-commerce application",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon app.js",
-    "start": "npm start --prefix client",
-    "dev": "concurrently \"npm start\" \"npm run server\""
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "keshav",
   "license": "ISC",
@@ -22,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.18",
+    "order-id": "^2.1.1",
     "razorpay": "^2.0.6",
     "shortid": "^2.2.16",
     "uuid": "^3.3.3"

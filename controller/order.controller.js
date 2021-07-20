@@ -3,6 +3,7 @@ const dbproduct = require("../modal/productModal")
 const Razorpay = require('razorpay')
 const shortid = require('shortid')
 const createError = require('http-errors')
+const orderid = require('order-id')('mysecret');
 
 const razorpay = new Razorpay({
     key_id: 'rzp_test_OySIcjLvv0NCGK',
@@ -54,6 +55,7 @@ module.exports = {
 
                         if (paymentDocument.status === 'captured') {
                             const order = new dbOrder({
+                                order_id : orderid.generate(),
                                 orderedBy,
                                 orderItems,
                                 shippingAddress,
