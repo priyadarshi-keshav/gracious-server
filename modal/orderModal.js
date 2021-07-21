@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const orderSchema = mongoose.Schema(
     {
-        order_id:{type:Number},
+        order_id:{type:String},
         orderedBy: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
