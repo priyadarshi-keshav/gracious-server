@@ -149,14 +149,14 @@ module.exports = {
     // @POST ROUTE /admin/add_product
     addProduct: async (req, res, next) => {
         try {
-            const { name, brand, description, price, image, quantity_available, product_details, created_by, category_id } = req.body
-            console.log(req.body)
+            const { name, brand, description, price, image, offerprice, quantity_available, product_details, created_by, category_id } = req.bodyy
+            
             const productData = {
                 name,
                 brand,
                 description,
                 price,
-                offerprice: offerprice ? offerprice : null,
+                offerprice,
                 image: image[0],
                 image2: image.length === 2 && image[1] || '',
                 image3: image.length === 3 && image[2] || '',
