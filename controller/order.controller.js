@@ -6,8 +6,10 @@ const createError = require('http-errors')
 const orderid = require('order-id')('mysecret');
 
 const razorpay = new Razorpay({
-    key_id: 'rzp_test_OySIcjLvv0NCGK',
-    key_secret: 'XKJ4JKCEcBrnWx5GHrMXXqYn'
+    key_id: 'rzp_live_qWILT9N5SKBioC',
+    key_secret: 'j7N5z1C4WrdsfamMmVlpZmFj'
+    // key_id: 'rzp_test_OySIcjLvv0NCGK',
+    // key_secret: 'XKJ4JKCEcBrnWx5GHrMXXqYn'
 })
 
 
