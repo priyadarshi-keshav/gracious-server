@@ -2,7 +2,8 @@ const dbcategory = require('../modal/categoryModal')
 const dbproduct = require("../modal/productModal");
 const dbuser = require("../modal/userModal")
 const dborder = require("../modal/orderModal")
-const createError = require('http-errors')
+const createError = require('http-errors');
+const { deleteImageFromS3 } = require('../config/s3');
 
 
 module.exports = {
@@ -149,7 +150,7 @@ module.exports = {
     // @POST ROUTE /admin/add_product
     addProduct: async (req, res, next) => {
         try {
-            const { name, brand, description, price, image, offerprice, quantity_available, product_details, created_by, category_id } = req.bodyy
+            const { name, brand, description, price, image, offerprice, quantity_available, product_details, created_by, category_id } = req.body
             
             const productData = {
                 name,
@@ -218,14 +219,16 @@ module.exports = {
     deleteProduct: async (req, res, next) => {
         try {
             const product_id = req.params.productId
-            const product = await dbproduct.deleteOne({ _id: product_id })
 
-            if (product.deletedCount > 0) {
+            const deleteProduct = await dbproduct.deleteOne({ _id: product_id })
+
+            if (deleteProduct.deletedCount > 0) {
                 return res.send(`Product has been deleted`)
             }
             else {
                 throw createError.InternalServerError()
             }
+            
         } catch (error) {
             next(error)
         }

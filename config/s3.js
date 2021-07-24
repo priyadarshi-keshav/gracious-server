@@ -23,11 +23,21 @@ module.exports = {
         const params = ({
             Bucket: bucketName,
             Key: imageName,
-            Expires: 60
+            Expires: 360
         })
 
         const uploadURL = await s3.getSignedUrlPromise('putObject', params)
         return uploadURL
-    }
-}
+    },
 
+    deleteImageFromS3: async (imageKey) => {
+        const params = ({
+            Bucket: bucketName,
+            Key: imageKey,
+        })
+        console.log(params)
+
+        const data = await s3.deleteObject(params)
+        return data
+    } 
+}
