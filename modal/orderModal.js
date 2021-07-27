@@ -21,6 +21,9 @@ const orderSchema = mongoose.Schema(
                 price: { type: Number, required: true }
             }
         ],
+        orderNote: {
+            type:String
+        },
         shippingAddress: {
             name: { type: String, required: true },
             address: { type: String, required: true },
@@ -55,6 +58,10 @@ const orderSchema = mongoose.Schema(
             type: Number,
             required: true,
             default: 0.0
+        },
+        giftWrap:{
+            type:Number,
+            default:0
         },
         totalPrice: {
             type: Number,

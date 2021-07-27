@@ -43,7 +43,7 @@ module.exports = {
     // @POST ROUTE /order/place_order
     placeOrder: async (req, res, next) => {
         try {
-            const { orderedBy, orderItems, shippingAddress, paymentMethod, paymentResult, itemsPrice, deliveryPrice, totalPrice } = req.body
+            const { orderedBy, orderItems, orderNote, shippingAddress, paymentMethod, paymentResult, itemsPrice, deliveryPrice, giftWrap, totalPrice } = req.body
 
             if (orderItems && orderItems.length === 0) {
                 throw createError.BadRequest()
@@ -58,6 +58,7 @@ module.exports = {
                                 order_id : orderid.generate(),
                                 orderedBy,
                                 orderItems,
+                                orderNote,
                                 shippingAddress,
                                 paymentMethod,
                                 paymentResult: {
@@ -73,6 +74,7 @@ module.exports = {
                                 },
                                 itemsPrice,
                                 deliveryPrice,
+                                giftWrap,
                                 totalPrice,
                                 isPaid: true,
                                 paidAt: new Date(),

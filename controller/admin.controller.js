@@ -190,7 +190,6 @@ module.exports = {
             const productId = req.params.productId
             const { name, brand, description, price, offerprice, quantity_available, quantity_ordered, product_details, category_id } = req.body
             const product = await dbproduct.findById(productId)
-            console.log(req.body)
             if (product) {
                 product.name = name || product.name
                 product.brand = brand || product.brand
