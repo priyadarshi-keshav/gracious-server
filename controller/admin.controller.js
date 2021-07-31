@@ -159,7 +159,7 @@ module.exports = {
                 price,
                 offerprice,
                 image: image[0],
-                image2: image.length === 2 && image[1] || '',
+                image2: image.length >= 2 && image[1] || '',
                 image3: image.length === 3 && image[2] || '',
                 views: 0,
                 quantity_available,
